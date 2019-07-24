@@ -4,9 +4,16 @@
 
 Buffalo defaults to using [plush](https://github.com/gobuffalo/plush) as its template engine.
 
-<%= vimeo("207200621") %>
+<div class="row">
+  <div class="col-md-6">
+    <%= vimeo("207200621") %>
+  </div>
+  <div class="col-md-6">
+    <%= vimeo("267643588") %>
+  </div>
+</div>
 
-<%= title("General Usage", {name: "general"}) %>
+## General Usage
 
 ```html
 // templates/index.html
@@ -21,6 +28,7 @@ Buffalo defaults to using [plush](https://github.com/gobuffalo/plush) as its tem
 ```go
 // actions/index.go
 func IndexHandler(c buffalo.Context) error {
+  c.Set("name", "Mark")
   c.Set("names", []string{"John", "Paul", "George", "Ringo"})
   return c.Render(200, r.HTML("index.html"))
 }
@@ -37,7 +45,7 @@ func IndexHandler(c buffalo.Context) error {
 &lt;/ul>
 ```
 
-<%= title("If Statements", {name: "if"}) %>
+## If Statements
 
 ```html
 \<%= if (true) { %>
@@ -47,7 +55,7 @@ func IndexHandler(c buffalo.Context) error {
 
 
 
-<%= title("Else Statements", {name: "else"}) %>
+## Else Statements
 
 ```html
 \<%= if (false) { %>

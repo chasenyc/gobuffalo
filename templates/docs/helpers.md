@@ -2,34 +2,134 @@
 
 <%= partial("docs/disclaimer.html") %>
 
-<%= title("Builtin Helpers") %>
+## Builtin Helpers
 
-Listed below are a few of the helpers that ship with Plush. Please see the Plush [documentation](https://github.com/gobuffalo/plush) for more information on its helpers.
+A full list of all helper functions for [`github.com/gobuffalo/plush`](https://godoc.org/github.com/gobuffalo/plush) can be found at [`github.com/gobuffalo/helpers`](https://godoc.org/github.com/gobuffalo/helpers).
 
-* `json` - converts the interface to a JSON object
-* `jsEscape` - escapes the interface to be JavaScript safe
-* `htmlEscape` - escapes the interface to be HTML safe
-* `upcase` - converts the string to upper case
-* `downcase` - converts the string to lower case
-* `contentFor` - stores a block of HTML to be used later
-* `contentOf` - retrieves a block of HTML previously stored with `contentFor`
-* `markdown` - converts the string from Markdown into HTML
-* `len` - returns the length of the interface
-* `debug` - returns the `%+v` of the interface wrapped in `%lt;pre%gt;` tags.
-* `inspect` - returns the `%+v` of the interface
-* `range` - interate between, and including two numbers
-* `between` - iterate between, but not including, two numbers
-* `until` - iterate until a number is reached
-* `groupBy` - splits a slice or array into `n` groups
-* `env` - returns the ENV variable for the specified key
-* `truncate` - truncates a string to a specified length
-* `raw` - converts a string to `template.HTML`
-* `form` - support for the [github.com/gobuffalo/tags/form](https://github.com/gobuffalo/tags/tree/master/form) package (Bootstrap version)
-* `form_for` - support for the [github.com/gobuffalo/tags/form](https://github.com/gobuffalo/tags/tree/master/form) package (Bootstrap version) to build a form for a model
+## Path Helpers
 
-Plush also imports all of the helpers found [https://github.com/markbates/inflect/blob/master/helpers.go](https://github.com/markbates/inflect/blob/master/helpers.go)
+Buffalo will generate path helpers for all of the routes you add to the App. The easiest way to see what all of the generated path helpers are and what they point to is to run `buffalo routes`. This will print out a list that looks something like this:
 
-<%= title("Content Helpers") %>
+```text
+$ buffalo routes
+METHOD | PATH                         | ALIASES | NAME              | HANDLER
+------ | ----                         | ------- | ----              | -------
+GET    | /                            |         | rootPath          | github.com/gobuffalo/coke/actions.HomeHandler
+GET    | /about                       |         | aboutPath         | github.com/gobuffalo/coke/actions.AboutHandler
+GET    | /drinks                      |         | drinksPath        | github.com/gobuffalo/coke/actions.DrinksResource.List
+POST   | /drinks                      |         | drinksPath        | github.com/gobuffalo/coke/actions.DrinksResource.Create
+GET    | /drinks/new                  |         | newDrinksPath     | github.com/gobuffalo/coke/actions.DrinksResource.New
+GET    | /drinks/{drink_id}           |         | drinkPath         | github.com/gobuffalo/coke/actions.DrinksResource.Show
+PUT    | /drinks/{drink_id}           |         | drinkPath         | github.com/gobuffalo/coke/actions.DrinksResource.Update
+DELETE | /drinks/{drink_id}           |         | drinkPath         | github.com/gobuffalo/coke/actions.DrinksResource.Destroy
+GET    | /drinks/{drink_id}/edit      |         | editDrinkPath     | github.com/gobuffalo/coke/actions.DrinksResource.Edit
+GET    | /api/v1/users                |         | apiV1UsersPath    | github.com/gobuffalo/coke/actions.UsersResource.List
+POST   | /api/v1/users                |         | apiV1UsersPath    | github.com/gobuffalo/coke/actions.UsersResource.Create
+GET    | /api/v1/users/new            |         | newApiV1UsersPath | github.com/gobuffalo/coke/actions.UsersResource.New
+GET    | /api/v1/users/{user_id}      |         | apiV1UserPath     | github.com/gobuffalo/coke/actions.UsersResource.Show
+PUT    | /api/v1/users/{user_id}      |         | apiV1UserPath     | github.com/gobuffalo/coke/actions.UsersResource.Update
+DELETE | /api/v1/users/{user_id}      |         | apiV1UserPath     | github.com/gobuffalo/coke/actions.UsersResource.Destroy
+GET    | /api/v1/users/{user_id}/edit |         | editApiV1UserPath | github.com/gobuffalo/coke/actions.UsersResource.Edit
+```
+
+Going down this list we start with the path *NAME*d `rootPath` which represents *PATH* `/` or the root route of the server and as a bonus with all of these we can even see exactly which *HANDLER* code is being run for this METHOD+PATH combination.
+
+Next we have a standard `app.GET("/about", AboutHandler)` which generates to `aboutPath`.
+
+Then we use a resource `app.Resource("/drinks", DrinksResource{})` which generates a path for each of our standard actions, and for each of those a helper to be used in templates. Those that take a parameter can be used like this `\<%= drinkPath({drink_id: drink.ID}) %>`. All helpers take a `map[string]interface{}` that is used to fill-in parameters.
+
+Finally, when we use a group we can see that this changes the generated helpers. Here is the routing for those last paths:
+
+```
+api := app.Group("/api/v1")
+api.Resource("/users", UsersResource{})
+```
+
+**Note** that the helpers are generated to match the generated paths. It is possible to override the path names in the `App.Routes`, but it is highly advised that you find a different way to your goal than this. Slack is always open to these conversations.
+
+### PathFor Helper
+
+The [`github.com/gobuffalo/helpers/paths#PathFor`](https://godoc.org/github.com/gobuffalo/helpers/paths#PathFor) helper takes an `interface{}`, or a `slice` of them, and tries to convert it to a `/foos/{id}` style URL path.
+
+Rules:
+
+* if `string` it is returned as is
+* if [`github.com/gobuffalo/helpers/paths#Pathable`](https://godoc.org/github.com/gobuffalo/helpers/paths#Pathable) the `ToPath` method is returned
+* if `slice` or an `array` each element is run through the helper then joined
+* if [`github.com/gobuffalo/helpers/paths#Paramable`](https://godoc.org/github.com/gobuffalo/helpers/paths#Paramable) the `ToParam` method is used to fill the `{id}` slot
+* if `<T>.Slug` the slug is used to fill the `{id}` slot of the URL
+* if `<T>.ID` the ID is used to fill the `{id}` slot of the URL
+
+### LinkTo Helpers
+
+### LinkTo
+
+The [`github.com/gobuffalo/helpers/tags#LinkTo`](https://godoc.org/github.com/gobuffalo/helpers/tags#LinkTo)
+helpers creates HTML for a `<a>` tag using [`github.com/gobuffalo/tags`](https://godoc.org/github.com/gobuffalo/tags)
+to create tag with the given [`github.com/gobuffalo/tags#Options`](https://godoc.org/github.com/gobuffalo/tags#Options) and using
+[`github.com/gobuffalo/helpers/paths#PathFor`](https://godoc.org/github.com/gobuffalo/helpers/paths#PathFor) to set the `href` element.
+
+If given a block it will be interrupted and appended inside of the `<a>` tag.
+
+#### Example 1:
+
+```html
+&lt;%= linkTo([user, widget], {class: "btn"}) %&gt;
+
+&lt;a class="btn" href="/users/id/widget/slug"&gt;&lt;/a&gt;
+```
+
+#### Example 2:
+
+```html
+&lt;%= linkTo("foo", {class: "btn"}) %&gt;
+
+&lt;a class="btn" href="/foo"&gt;&lt;/a&gt;
+```
+
+#### Example 3:
+
+```html
+&lt;%= linkTo(user, {class: "btn"}) { %&gt;
+Click Me!
+&lt;% } %&gt;
+
+&lt;a class="btn" href="/users/id"&gt;Click Me!&lt;/a&gt;
+```
+
+### RemoteLinkTo
+
+The [`github.com/gobuffalo/helpers/tags#RemoteLinkTo`](https://godoc.org/github.com/gobuffalo/helpers/tags#RemoteLinkTo) helper provides the same functionality as
+[`github.com/gobuffalo/helpers/tags#LinkTo`](https://godoc.org/github.com/gobuffalo/helpers/tags#LinkTo) but adds the `data-remote` element for use with
+[https://www.npmjs.com/package/rails-ujs](https://www.npmjs.com/package/rails-ujs) which is included in the default generated Webpack configuration.
+
+#### Example 1:
+
+```html
+&lt;%= remoteLinkTo([user, widget], {class: "btn"}) %&gt;
+
+&lt;a class="btn" data-remote="true" href="/users/id/widget/slug"&gt;&lt;/a&gt;
+```
+
+#### Example 2:
+
+```html
+&lt;%= remoteLinkTo("foo", {class: "btn"}) %&gt;
+
+&lt;a class="btn" data-remote="true" href="/foo"&gt;&lt;/a&gt;
+```
+
+#### Example 3:
+
+```html
+&lt;%= remoteLinkTo(user, {class: "btn"}) { %&gt;
+Click Me!
+&lt;% } %&gt;
+
+&lt;a class="btn" data-remote="true" href="/users/id"&gt;Click Me!&lt;/a&gt;
+```
+
+## Content Helpers
 
 Plush ships with two complementary helpers that let you create dynamic HTML snippets and re-use them later in the template.
 

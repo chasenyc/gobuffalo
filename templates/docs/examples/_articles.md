@@ -1,8 +1,24 @@
-<%= title("Articles About Buffalo") %>
+## Articles About Buffalo
+
+* **March 27th, 2019** - Buffalo test and lint workflow with reflex [https://dan.cardamore.ca/gobuffalo_reflex/](https://dan.cardamore.ca/gobuffalo_reflex/)
+
+* **March 26th, 2019** - Automated buffalo deployments to kubernetes using gitlab-ci [https://dan.cardamore.ca/gobuffalo-gitlab-kubernetes-deploy](https://dan.cardamore.ca/gobuffalo-gitlab-kubernetes-deploy)
+
+* **January 15th, 2019** - Cara Bisa Install Buffalo pada Windows 10 [https://kangmicin.com/2018/12/30/cara-install-buffalo-di-windows/](https://kangmicin.com/2018/12/30/cara-install-buffalo-di-windows/)
+
+* **November 17th, 2018** - Setting Up Windows For Go And Buffalo [http://www.stuartellis.name/articles/windows-golang-setup/](http://www.stuartellis.name/articles/windows-golang-setup/)
+
+* **November 4th, 2018** - Integrating Go-Buffalo with Pre-existing Apps [https://jayunit100.blogspot.com/2018/11/integrating-go-buffalo-with-golang.html](https://jayunit100.blogspot.com/2018/11/integrating-go-buffalo-with-golang.html)
+
+* **August 19th, 2018** - Web App With Gobuffalo [http://www.nicolasmorin.com/blog/web-app-with-gobuffalo/](http://www.nicolasmorin.com/blog/web-app-with-gobuffalo/)
+
+* **August 3rd, 2018** - Add Custom Dashboard Template to Buffalo Application [https://medium.com/@KagundaJM/add-custom-dashboard-template-to-buffalo-application-2515298ecf75](https://medium.com/@KagundaJM/add-custom-dashboard-template-to-buffalo-application-2515298ecf75)
+
+* **January 23rd, 2018** - Instrumenting a Buffalo Application with New Relic [https://medium.com/@brainscott/instrumenting-a-buffalo-application-with-new-relic-1e9aa473e31d](https://medium.com/@brainscott/instrumenting-a-buffalo-application-with-new-relic-1e9aa473e31d)
 
 * **January 9th, 2018** - GoBuffalo Nested Resources [http://www.candland.net/gobuffalo/2018/01/09/gobuffalo_nested_resources.html](http://www.candland.net/gobuffalo/2018/01/09/gobuffalo_nested_resources.html)
 
-* **January 1st, 2018** - Web Apps with Buffalo - Part I [https://mmikael.com/post/buffalo-part1/](https://mmikael.com/post/buffalo-part1/) - Part II [https://mmikael.com/post/buffalo-part2/](https://mmikael.com/post/buffalo-part2/)
+* **January 1st, 2018** - Web Apps with Buffalo - Part I [https://mmikael.com/posts/buffalo-part1/](https://mmikael.com/posts/buffalo-part1/) - Part II [https://mmikael.com/posts/buffalo-part2/](https://mmikael.com/posts/buffalo-part2/)
 
 * **December 2nd, 2017** - Golang Buffalo Tutorial To Create A Web Site With Authentication [https://blog.john-pfeiffer.com/golang-buffalo-tutorial-to-create-a-web-site-with-authentication/](https://blog.john-pfeiffer.com/golang-buffalo-tutorial-to-create-a-web-site-with-authentication/)
 
@@ -10,9 +26,7 @@
 
 * **November 6th, 2017** - Why You Should Choose Buffalo For Building Web Apps In Go [https://medium.com/@alkeshsrivastava11/why-you-should-choose-buffalo-for-building-web-apps-in-go-46f711043437](https://medium.com/@alkeshsrivastava11/why-you-should-choose-buffalo-for-building-web-apps-in-go-46f711043437)
 
-* **Octover 9th, 2017** - JWT And [Go] Buffalo [https://medium.com/@francescodonzello/jwt-and-go-buffalo-4cce3ae73723](https://medium.com/@francescodonzello/jwt-and-go-buffalo-4cce3ae73723)
-
-* **August 25th, 2017** - Setting Up Windows For Go And Buffalo [http://www.stuartellis.name/articles/windows-golang-setup/](http://www.stuartellis.name/articles/windows-golang-setup/)
+* **October 9th, 2017** - JWT And [Go] Buffalo [https://medium.com/@francescodonzello/jwt-and-go-buffalo-4cce3ae73723](https://medium.com/@francescodonzello/jwt-and-go-buffalo-4cce3ae73723)
 
 * **August 25th, 2017** - Get Rolling With Buffalo On Windows [http://www.stuartellis.name/articles/buffalo-windows-short/](http://www.stuartellis.name/articles/buffalo-windows-short/)
 
@@ -28,7 +42,7 @@
 
 * More articles can be found at [https://blog.gobuffalo.io](https://blog.gobuffalo.io)
 
-<%= title("Podcasts About Buffalo") %>
+## Podcasts About Buffalo
 
 * **October 5th, 2017** - Mark Bates On Go And Buffalo [https://www.oreilly.com/ideas/mark-bates-on-go-and-buffalo](https://www.oreilly.com/ideas/mark-bates-on-go-and-buffalo)
 
@@ -36,7 +50,7 @@
 
 * **January 12th, 2017** - Go And Buffalo Live From Dunkin' Donuts [https://changelog.com/gotime/29](https://changelog.com/gotime/29)
 
-<%= title("Videos About Buffalo") %>
+## Videos About Buffalo
 
 * **Mark Bates** - Buffalo Channel on Vimeo [https://vimeo.com/channels/1231196](https://vimeo.com/channels/1231196)
 

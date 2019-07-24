@@ -1,157 +1,58 @@
-@import "~bootstrap-sass/assets/stylesheets/_bootstrap-sprockets.scss";
-@import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "~bootstrap/scss/bootstrap.scss";
 @import "~font-awesome/css/font-awesome.css";
-@import "~highlightjs/styles/monokai.css";
+@import "~highlight.js/styles/monokai.css";
+
 @import "theme.scss";
 @import "skin.scss";
 @import "custom.scss";
+@import "general";
 
-.main-content {
-  padding-top: 40px;
-  margin-bottom: 100px;
-}
-
-.sidebar-boxed .sidenav ul ul {
-  padding-left: 0px;
-}
-
-.sidebar-boxed .sidenav ul ul a {
-  padding-left: 24px !important;
-}
-
-h2 {
-  line-height: 48px;
-}
-
-.info {
-  @extend .alert;
-
-  @extend .alert-info;
-
-  i.fa {
-    margin-right: 1em;
-  }
-}
-
-.warning {
-  @extend .alert;
-
-  @extend .alert-warning;
-
-  i.fa {
-    margin-right: 1em;
-  }
-}
-
-.get-started-btn {
-  @extend .text-center;
-
-  margin-top: 1em;
-}
-
-.faq {
-  h6 {
+#docs-main {
     p {
-      display: inline;
+        font-size: 20px;
     }
-  }
-}
 
-#global-footer {
-  background-color: #f5f5f5;
-  padding-top: 0.8em;
-  padding-bottom: 0.8em;
-  border-radius: 0;
-  margin-bottom: 0;
-  margin-left: -15px;
-  margin-right: -15px;
-}
-
-.feature {
-  @extend .col-xs-12;
-
-  @extend .col-md-6;
-
-  margin-bottom: 1em;
-}
-
-.sidebar-form {
-  padding: 2px 20px !important;
-  border-bottom: solid 1px #3c4c5f;
-
-  label {
-    color: #aaa;
-  }
-
-  select.form-control {
-    background-color: #5b728f;
-    border-color: #222;
-    color: #eee;
-  }
-}
-
-.jumbotron {
-  background-color: #FFF3CA;
-
-  h1 {
-    margin: 10px;
-    margin-left: 0px;
-  }
-
-  .logo-presentation {
-    @extend .pull-right;
-
-    width: 100%;
-    min-width: 150px;
-    max-width: 280px;
-  }
-}
-
-#platinum-sponsors {
-  text-align: center;
-
-  .logo {
-    display: inline-block;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  img {
-    width: 120px;
-  }
-}
-
-.main-content table {
-  width: 100%;
-
-  td, th {
-    border-top: 1px solid #dee2e6;
-    padding: .75rem;
-    vertical-align: top;
-  }
-
-  thead > tr > th {
-    color: #fff;
-    background-color: #212529;
-    border-color: #32383e;
-  }
-}
-
-a {
-  code {
-    text-decoration: underline;
-    text-decoration-color: #62a8ea;
-
-    &:hover {
-      text-decoration: none;
+    .summary {
+        li {
+            font-size: 20px;
+        }
     }
-  }
-}
 
-.since-version {
-  @extend .label;
+    .main-content {
+        max-width: 1400px;
+    }
 
-  @extend .label-primary;
+    // .sidebar-boxed ~ main .main-content {
+    //     padding: 0px;
+    // }
+    //
+    h1::after, h2::after, h3::after {
+        width: 100%;
+    }
 
-  font-family: Arial, Helvetica, sans-serif;
+    h2::after, h3::after {
+        border-bottom: 0px solid #e0562e;
+    }
+
+    h2 {
+        font-weight: bold;
+    }
+
+    h2, h3 {
+        text-align: left;
+        margin-bottom: 0px;
+    }
+
+    h1::before, h2::before, h3::before {
+        content: '';
+        border-top: 1px solid #e0562e;
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+        padding-top: 15px;
+    }
+
+    .since-version {
+        font-size: 12px;
+    }
 }
